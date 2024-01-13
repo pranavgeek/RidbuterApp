@@ -1,20 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import LoginForm from './components/login';
+import MainApp from './components/mainApp';
 
-export default function App() {
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginForm} options={{ 
+          headerLeft: null,
+          headerTitle: "Ridbuter",
+          headerStyle: {
+            backgroundColor: '#2a52be',
+          },
+          headerTitleStyle: {
+            color: 'white',
+            fontSize: 30,
+            marginLeft: -170
+          },
+          }}/>
+        <Stack.Screen name="Ridbuter" component={MainApp} options={{ 
+          headerLeft: null,
+          headerStyle: {
+            backgroundColor: '#2a52be'
+          },
+          headerTitleStyle: {
+            color: 'white',
+            fontSize: 30,
+            marginLeft: -170
+          },
+          }}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
